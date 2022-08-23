@@ -126,14 +126,6 @@ public class PersonStatisticHandler {
             }
         }
 
-//        if (personList.isEmpty()) {
-//            System.out.println("This name is not on the list.");
-//        } else {
-//            System.out.println("There are " + personList.size() + " -> " + nameList);
-//            for (Person person : personList) {
-//                System.out.println(person);
-//            }
-//        }
         String warningString = "This name is not on the list.";
         String goodString = "There are " + personList.size() + " -> " + nameList;
         printInfo2(personList, goodString, warningString);
@@ -174,17 +166,11 @@ public class PersonStatisticHandler {
                 personList.add(person);
             }
         }
-//        if (!personList.isEmpty()) {
-//            System.out.println("There are " + personList.size() + " Witch name that match provided string - >" + string);
-//            System.out.println(personList);
-//        } else {
-//            System.out.println("Search failed");
-//        }
+
         String warningString = "Search failed";
         String goodString = "There are " + personList.size() + " Witch name that match provided string - >" + string + "\n" + personList;
         printInfo3(personList, goodString, warningString);
     }
-
 
     public void checkFullStatisticWithoutDuplicates() {
         Set<Person> personSet = new LinkedHashSet<>(persons);
@@ -196,21 +182,10 @@ public class PersonStatisticHandler {
             return;
         }
 
+
     }
 
 
-//    public void removeDuplicates() {
-//        Set<Person> personSet = new LinkedHashSet<>(persons);
-//        for (Person person : persons) {
-//            personSet.add(person);
-//            persons.remove(person);
-//            personSet.add(person);
-//            return;
-//
-//        }
-//
-//
-//    }
 
     public void removeDuplicates() {
         Set<Person> personSet = new LinkedHashSet<>(persons);
