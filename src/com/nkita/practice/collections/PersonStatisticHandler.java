@@ -176,15 +176,12 @@ public class PersonStatisticHandler {
         Set<Person> personSet = new LinkedHashSet<>(persons);
         System.out.println("Statistics with duplicate");
 
-        for (Person person : persons) {
-            personSet.add(person);
-            System.out.println(personSet);
-            return;
+        for (Person person : personSet) {
+            System.out.println(person);
         }
 
 
     }
-
 
 
     public void removeDuplicates() {
@@ -192,10 +189,10 @@ public class PersonStatisticHandler {
         persons.clear();
         persons.addAll(personSet);
 
-        }
-
-
     }
+
+
+}
 
 
 

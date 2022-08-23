@@ -17,16 +17,16 @@ public class Main {
 
 
             personStatisticHandler.checkFullStatisticWithoutDuplicates();
-        System.out.println();
-            personStatisticHandler.checkStatisticByName("Nikita");
-        System.out.println();
-        personStatisticHandler.removeDuplicates();
-        System.out.println();
-        personStatisticHandler.checkStatisticByName("Nikita");
-        personStatisticHandler.checkStatisticByName("Marcus");
-        personStatisticHandler.checkStatisticByName("Alina");
-        personStatisticHandler.checkStatisticByName("Maksim");
-        personStatisticHandler.checkStatisticByName("Dasha");
+//        System.out.println();
+//            personStatisticHandler.checkStatisticByName("Nikita");
+//        System.out.println();
+//        personStatisticHandler.removeDuplicates();
+//        System.out.println();
+//        personStatisticHandler.checkStatisticByName("Nikita");
+//        personStatisticHandler.checkStatisticByName("Marcus");
+//        personStatisticHandler.checkStatisticByName("Alina");
+//        personStatisticHandler.checkStatisticByName("Maksim");
+//        personStatisticHandler.checkStatisticByName("Dasha");
 
 
 
