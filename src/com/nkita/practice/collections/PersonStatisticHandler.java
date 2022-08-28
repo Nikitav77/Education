@@ -192,7 +192,102 @@ public class PersonStatisticHandler {
     }
 
 
+    public void checkOldestPerson(Gender original) {
+
+        List<Person> female = new ArrayList<>();
+        List<Person> femaleAge = new ArrayList<>();
+        List<Person> male = new ArrayList<>();
+        List<Person> maleAge = new ArrayList<>();
+        List<Person> genderMaleAndFemale = new ArrayList<>();
+        List<Person> genderMaleAgeAndGenderFemaleAge = new ArrayList<>();
+
+
+        int max = 0;
+
+
+        for (Person person : persons) {
+
+            if (original == null) {
+                genderMaleAndFemale.add(person);
+            }
+        }
+
+        for (Person person : genderMaleAndFemale) {
+            if (person.getAge() > max)
+                max = person.getAge();
+        }
+
+        for (Person person : genderMaleAndFemale) {
+            if (person.getAge() == max) {
+                genderMaleAgeAndGenderFemaleAge.add(person);
+            }
+
+        }
+
+
+        for (Person person : persons) {
+            if (person.getGender() == Gender.FEMALE) {
+                female.add(person);
+
+            }
+        }
+
+        for (Person person1 : female) {
+            if (person1.getAge() > max)
+                max = person1.getAge();
+        }
+
+        for (Person personAge : female) {
+            if (personAge.getAge() == max) {
+                femaleAge.add(personAge);
+            }
+
+        }
+
+
+        for (Person person : persons) {
+            if (person.getGender() == Gender.MALE) {
+                male.add(person);
+
+            }
+        }
+
+        for (Person person1 : male) {
+            if (person1.getAge() > max)
+                max = person1.getAge();
+        }
+
+        for (Person personAge : male) {
+            if (personAge.getAge() == max) {
+                maleAge.add(personAge);
+            }
+
+        }
+
+
+        if (original == Gender.FEMALE) {
+            System.out.println("The oldest Person(s) witch gender FEMALE");
+            System.out.println(femaleAge);
+        } else if (original == Gender.MALE) {
+            System.out.println("The oldest Person(s) witch gender MALE");
+            System.out.println(maleAge);
+        } else {
+            System.out.println("The oldest Person(s) number of people => " + genderMaleAgeAndGenderFemaleAge.size());
+            System.out.println(genderMaleAgeAndGenderFemaleAge);
+        }
+
+    }
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
