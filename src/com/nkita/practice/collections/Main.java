@@ -17,7 +17,7 @@ public class Main {
         personStatisticHandler.addPersonForStatistic(new Person("Dima", 49, 1.85, 80, Gender.MALE));
 
 
-        personStatisticHandler.checkOldestPerson(null);
+        personStatisticHandler.checkOldestPerson(Gender.MALE);
 
 
 
