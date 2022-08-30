@@ -36,13 +36,7 @@ public class PersonStatisticHandler {
     }
 
     public void checkStatisticByAge(int age) {
-        List<Person> personsList = new ArrayList<>();
-        for (Person person : persons) {
-            if (person.getAge() == age) {
-                personsList.add(person);
-            }
-
-        }
+        List<Person> personsList = getPersonsListByAge(age, null);
 
         String goodString = String.format("There are %s persons with age = %s", persons.size(), age);
         String warning = "This age is not listed";
@@ -176,15 +170,12 @@ public class PersonStatisticHandler {
         Set<Person> personSet = new LinkedHashSet<>(persons);
         System.out.println("Statistics with duplicate");
 
-        for (Person person : persons) {
-            personSet.add(person);
-            System.out.println(personSet);
-            return;
+        for (Person person : personSet) {
+            System.out.println(person);
         }
 
 
     }
-
 
 
     public void removeDuplicates() {
@@ -192,11 +183,40 @@ public class PersonStatisticHandler {
         persons.clear();
         persons.addAll(personSet);
 
-        }
+    }
 
+    private List<Person> getPersonsListByAge(int age, Gender gender) {
+
+        List<Person> personsList = new ArrayList<>();
+
+        for (Person person : persons) {
+            if (person.getAge() == age && (gender == null || gender == person.getGender())) {
+                personsList.add(person);
+            }
+
+        }
+        return personsList;
 
     }
 
 
+    public void checkOldestPerson(Gender gender) {
 
+        int maxAge = 0;
+        boolean ignoreGender = gender == null;
+        for (Person person : persons) {
+            if (person.getAge() > maxAge && (ignoreGender || person.getGender() == gender)) {
+                maxAge = person.getAge();
+            }
+        }
 
+        List<Person> oldestPersons = getPersonsListByAge(maxAge, gender);
+
+        if (ignoreGender) {
+            System.out.println("The oldest Person(s) number of people => " + oldestPersons.size() + "\n" + oldestPersons);
+
+        } else {
+            System.out.println("The oldest Person(s) witch gender " + gender + "\n" + oldestPersons);
+        }
+    }
+}
