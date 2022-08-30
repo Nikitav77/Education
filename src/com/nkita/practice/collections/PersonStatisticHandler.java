@@ -204,25 +204,19 @@ public class PersonStatisticHandler {
 
         int maxAge = 0;
         for (Person person : persons) {
-            if (person.getAge() > maxAge) {
-
-                if (gender == null || person.getGender() == gender) {
-                    maxAge = person.getAge();
-                }
+            boolean ignoreGender = gender == null;
+            if (person.getAge() > maxAge && (ignoreGender || person.getGender() == gender)) {
+                maxAge = person.getAge();
             }
         }
 
-        List<Person> genderMaleAgeAndGenderFemaleAge = getPersonsListByAge(maxAge, gender);
+        List<Person> oldestPersons = getPersonsListByAge(maxAge, gender);
 
         if (gender == null) {
-            System.out.println("The oldest Person(s) number of people => " + genderMaleAgeAndGenderFemaleAge.size());
-            System.out.println(genderMaleAgeAndGenderFemaleAge);
-        } else if (gender == Gender.FEMALE) {
-            System.out.println("The oldest Person(s) witch gender FEMALE");
-            System.out.println(genderMaleAgeAndGenderFemaleAge);
-        } else if (gender == Gender.MALE) {
-            System.out.println("The oldest Person(s) witch gender MALE");
-            System.out.println(genderMaleAgeAndGenderFemaleAge);
+            System.out.println("The oldest Person(s) number of people => " + oldestPersons.size() + "\n" + oldestPersons);
+
+        } else {
+            System.out.println("The oldest Person(s) witch gender " + gender + "\n" + oldestPersons);
         }
     }
 }
