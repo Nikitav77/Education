@@ -203,8 +203,8 @@ public class PersonStatisticHandler {
     public void checkOldestPerson(Gender gender) {
 
         int maxAge = 0;
+        boolean ignoreGender = gender == null;
         for (Person person : persons) {
-            boolean ignoreGender = gender == null;
             if (person.getAge() > maxAge && (ignoreGender || person.getGender() == gender)) {
                 maxAge = person.getAge();
             }
@@ -212,7 +212,7 @@ public class PersonStatisticHandler {
 
         List<Person> oldestPersons = getPersonsListByAge(maxAge, gender);
 
-        if (gender == null) {
+        if (ignoreGender) {
             System.out.println("The oldest Person(s) number of people => " + oldestPersons.size() + "\n" + oldestPersons);
 
         } else {
