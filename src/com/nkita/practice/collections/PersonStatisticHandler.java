@@ -36,13 +36,7 @@ public class PersonStatisticHandler {
     }
 
     public void checkStatisticByAge(int age) {
-        List<Person> personsList = new ArrayList<>();
-        for (Person person : persons) {
-            if (person.getAge() == age) {
-                personsList.add(person);
-            }
-
-        }
+        List<Person> personsList = getPersonsListByAge(age, null);
 
         String goodString = String.format("There are %s persons with age = %s", persons.size(), age);
         String warning = "This age is not listed";
@@ -191,52 +185,44 @@ public class PersonStatisticHandler {
 
     }
 
+    private List<Person> getPersonsListByAge(int age, Gender gender) {
 
-    public void checkOldestPerson(Gender femaleAndMale) {
-        List<Person> genderMaleAgeAndGenderFemaleAge = new ArrayList<>();
+        List<Person> personsList = new ArrayList<>();
 
-        int max = 0;
-        if (femaleAndMale == Gender.FEMALE) {
-            for (Person person : persons) {
-                if (person.getGender() == Gender.FEMALE) {
-                    if (person.getAge() > max)
-                        max = person.getAge();
-                    genderMaleAgeAndGenderFemaleAge.add(person);
-                    genderMaleAgeAndGenderFemaleAge.clear();
-                    if (person.getAge() == max)
-                        genderMaleAgeAndGenderFemaleAge.add(person);
-                }
+        for (Person person : persons) {
+            if (person.getAge() == age && (gender == null || gender == person.getGender())) {
+                personsList.add(person);
             }
-        } else {
-            for (Person person1 : persons) {
-                if (person1.getGender() == Gender.MALE) {
-                    if (person1.getAge() > max)
-                        max = person1.getAge();
-                    genderMaleAgeAndGenderFemaleAge.add(person1);
-                    genderMaleAgeAndGenderFemaleAge.clear();
-                    if (person1.getAge() == max)
-                        genderMaleAgeAndGenderFemaleAge.add(person1);
-                } else {
-                    if (femaleAndMale == null) {
-                        if (person1.getAge() > max)
-                            max = person1.getAge();
-                        if (person1.getAge() == max)
-                            genderMaleAgeAndGenderFemaleAge.add(person1);
-                    }
+
+        }
+        return personsList;
+
+    }
+
+
+    public void checkOldestPerson(Gender gender) {
+
+        int maxAge = 0;
+        for (Person person : persons) {
+            if (person.getAge() > maxAge) {
+
+                if (gender == null || person.getGender() == gender) {
+                    maxAge = person.getAge();
                 }
             }
         }
 
-        if (femaleAndMale == null) {
+        List<Person> genderMaleAgeAndGenderFemaleAge = getPersonsListByAge(maxAge, gender);
+
+        if (gender == null) {
             System.out.println("The oldest Person(s) number of people => " + genderMaleAgeAndGenderFemaleAge.size());
             System.out.println(genderMaleAgeAndGenderFemaleAge);
-        } else if (femaleAndMale == Gender.FEMALE) {
+        } else if (gender == Gender.FEMALE) {
             System.out.println("The oldest Person(s) witch gender FEMALE");
             System.out.println(genderMaleAgeAndGenderFemaleAge);
-        } else if (femaleAndMale == Gender.MALE) {
+        } else if (gender == Gender.MALE) {
             System.out.println("The oldest Person(s) witch gender MALE");
             System.out.println(genderMaleAgeAndGenderFemaleAge);
         }
-
     }
 }
