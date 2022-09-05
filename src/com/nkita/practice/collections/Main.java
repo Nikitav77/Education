@@ -1,6 +1,9 @@
 package com.nkita.practice.collections;
 
+import com.nkita.practice.collections.PersonFilter;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,6 +22,8 @@ public class Main {
         personStatisticHandler.addPersonForStatistic(new Person("Dima", 30, 1.85, 80, Gender.MALE));
 
 
-      personStatisticHandler.checkSortedStatistic();
+     PersonFilter<String> personFilterByAge = new PersonFilter(PersonProperty.NAME, Arrays.asList("Nikita"));
+
+        System.out.println(personFilterByAge);
     }
 }
