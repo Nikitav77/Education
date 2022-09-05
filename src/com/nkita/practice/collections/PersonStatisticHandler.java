@@ -2,7 +2,7 @@ package com.nkita.practice.collections;
 
 import java.util.*;
 
-public class PersonStatisticHandler {
+public class PersonStatisticHandler{
 
     private List<Person> persons = new ArrayList<>();
 
@@ -219,4 +219,26 @@ public class PersonStatisticHandler {
             System.out.println("The oldest Person(s) witch gender " + gender + "\n" + oldestPersons);
         }
     }
+    public void checkSortedStatistic(){
+        List<Person> personList = new ArrayList<>(persons);
+        personList.sort(new Comparator<Person>() {
+            @Override
+            public int compare(Person age1, Person age2) {
+                if (age1.getAge() > age2.getAge()){
+                    return -1;
+                } else if (age1.getAge() < age2.getAge()) {
+                    return 1;
+                }else {
+                    return 0;
+                }
+
+            }
+        });
+        Collections.sort(personList);
+
+        for (Person o : personList){
+            System.out.println(o.getName() + " | " + o.getAge());
+        }
+    }
+
 }

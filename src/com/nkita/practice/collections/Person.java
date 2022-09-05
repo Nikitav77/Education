@@ -2,7 +2,7 @@ package com.nkita.practice.collections;
 
 import java.util.Objects;
 
-public class Person {
+public class Person implements Comparable<Person> {
     private String name;
     private int age;
     private double growth;
@@ -53,5 +53,10 @@ public class Person {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public int compareTo(Person o) {
+        return this.name.compareTo(o.getName());
     }
 }

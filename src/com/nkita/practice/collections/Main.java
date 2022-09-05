@@ -15,8 +15,10 @@ public class Main {
         personStatisticHandler.addPersonForStatistic(new Person("Sasha", 40, 1.85, 80, Gender.MALE));
         personStatisticHandler.addPersonForStatistic(new Person("Maksim", 9, 1.85, 80, Gender.MALE));
         personStatisticHandler.addPersonForStatistic(new Person("Dima", 49, 1.85, 80, Gender.MALE));
+        personStatisticHandler.addPersonForStatistic(new Person("Dima", 20, 1.85, 80, Gender.MALE));
+        personStatisticHandler.addPersonForStatistic(new Person("Dima", 30, 1.85, 80, Gender.MALE));
 
 
-        personStatisticHandler.checkOldestPerson(null);
+      personStatisticHandler.checkSortedStatistic();
     }
 }
