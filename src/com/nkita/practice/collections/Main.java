@@ -22,7 +22,8 @@ public class Main {
         personStatisticHandler.addPersonForStatistic(new Person("Dima", 30, 1.85, 80, Gender.MALE));
 
 
-     PersonFilter<String> personFilterByAge = new PersonFilter(PersonProperty.NAME, Arrays.asList("Nikita"));
+
+     PersonFilter<Integer> personFilterByAge = new PersonFilter(PersonProperty.AGE, Arrays.asList("2323"));
 
         System.out.println(personFilterByAge);
     }

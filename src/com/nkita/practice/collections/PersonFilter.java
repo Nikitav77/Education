@@ -3,16 +3,15 @@ package com.nkita.practice.collections;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PersonFilter <T>{
+public class PersonFilter<T> {
     private PersonProperty personProperty;
-    List<T> list = new ArrayList<T>();
+    private List<T> list;
 
 
     public PersonFilter(PersonProperty personProperty, List<T> list) {
         this.personProperty = personProperty;
         this.list = list;
     }
-
 
     public PersonProperty getPersonProperty() {
         return personProperty;
