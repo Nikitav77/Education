@@ -5,12 +5,12 @@ import java.util.List;
 
 public class PersonFilter<T> {
     private PersonProperty personProperty;
-    private List<T> list;
+    private List<T> values;
 
 
-    public PersonFilter(PersonProperty personProperty, List<T> list) {
+    public PersonFilter(PersonProperty personProperty, List<T> values) {
         this.personProperty = personProperty;
-        this.list = list;
+        this.values = values;
     }
 
     public PersonProperty getPersonProperty() {
@@ -23,20 +23,24 @@ public class PersonFilter<T> {
     }
 
 
-    public List<T> getList() {
-        return list;
-    }
-
-
     public void setList(List<T> list) {
-        this.list = list;
+        this.values = list;
     }
 
+
+    public List<T> getValues() {
+        return values;
+    }
+
+    public void setValues(List<T> values) {
+        this.values = values;
+    }
 
     @Override
     public String toString() {
         return "PersonFilter{" +
-                "list=" + list +
+                "personProperty=" + personProperty +
+                ", values=" + values +
                 '}';
     }
 }

@@ -2,7 +2,7 @@ package com.nkita.practice.collections;
 
 import java.util.*;
 
-public class PersonStatisticHandler{
+public class PersonStatisticHandler {
 
     private List<Person> persons = new ArrayList<>();
 
@@ -219,16 +219,17 @@ public class PersonStatisticHandler{
             System.out.println("The oldest Person(s) witch gender " + gender + "\n" + oldestPersons);
         }
     }
-    public void checkSortedStatistic(){
+
+    public void checkSortedStatistic() {
         List<Person> personList = new ArrayList<>(persons);
         personList.sort(new Comparator<Person>() {
             @Override
             public int compare(Person age1, Person age2) {
-                if (age1.getAge() > age2.getAge()){
+                if (age1.getAge() > age2.getAge()) {
                     return -1;
                 } else if (age1.getAge() < age2.getAge()) {
                     return 1;
-                }else {
+                } else {
                     return 0;
                 }
 
@@ -236,9 +237,65 @@ public class PersonStatisticHandler{
         });
         Collections.sort(personList);
 
-        for (Person o : personList){
+        for (Person o : personList) {
             System.out.println(o.getName() + " | " + o.getAge());
         }
     }
 
+    /**
+     * вывести в консоль всех пользователей кторые подходят под фильтры
+     *
+     * @param personFilters
+     */
+    public void checkFilteredStatistic(List<PersonFilter> personFilters) {
+        List<Person> personList = new ArrayList<>();
+        for (Person person : persons) {
+            if (specificFilterAndPerson(personFilters, person)) {
+                personList.add(person);
+            }
+        }
+        printInfo(personList);
+    }
+
+    private boolean specificFilterAndPerson(List<PersonFilter> personFilters, Person person) {
+        List<Boolean> result1 = new ArrayList<>();
+        for (PersonFilter personFilter : personFilters) {
+            boolean result = resultOfChecking(personFilter, person);
+            result1.add(result);
+        }
+        return !result1.contains(false);
+    }
+
+    private boolean resultOfChecking(PersonFilter personFilter, Person person) {
+        PersonProperty personProperty = personFilter.getPersonProperty();
+
+        switch (personProperty) {
+            case NAME:
+                return personFilter.getValues().contains(person.getName());
+            case AGE:
+                return personFilter.getValues().contains(person.getAge());
+            case HEIGHT:
+                return personFilter.getValues().contains(person.getHeight());
+            case WEIGHT:
+                return personFilter.getValues().contains(person.getWeight());
+            case GENDER:
+                return personFilter.getValues().contains(person.getGender());
+            default:
+                return false;
+        }
+
+    }
+
+    public void printInfo(List<Person> personList) {
+
+        if (!personList.isEmpty()) {
+            System.out.println("Search successful found Person(s)");
+            System.out.println(personList);
+        } else
+            System.out.println("Search failed no Person(s) found");
+
+    }
+
+
 }
+

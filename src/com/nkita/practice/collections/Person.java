@@ -10,7 +10,6 @@ public class Person implements Comparable<Person> {
     private  Gender gender;
 
 
-
     public Person(String name, int age, double height, double weight, Gender gender) {
         this.name = name;
         this.age = age;
@@ -53,6 +52,14 @@ public class Person implements Comparable<Person> {
 
     public String getName() {
         return name;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public double getWeight() {
+        return weight;
     }
 
     @Override
