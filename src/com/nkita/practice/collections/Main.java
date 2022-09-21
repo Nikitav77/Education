@@ -28,12 +28,14 @@ public class Main {
         PersonFilter<Gender> filterGender = new PersonFilter<>(PersonProperty.GENDER, Arrays.asList(Gender.MALE));
 
 
+
         List<PersonFilter> filters = new ArrayList<>();
         filters.add(filterByName);
         filters.add(filterByAge);
         filters.add(filterHeight);
         filters.add(filterWeight);
         filters.add(filterGender);
+
 
       personStatisticHandler.checkFilteredStatistic(filters);
     }
