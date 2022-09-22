@@ -250,23 +250,23 @@ public class PersonStatisticHandler {
     public void checkFilteredStatistic(List<PersonFilter> personFilters) {
         List<Person> personList = new ArrayList<>();
         for (Person person : persons) {
-            if (checksTheFilterListAndTheSpecificPerson(personFilters, person)) {
+            if (isPersonValidForFilters(personFilters, person)) {
                 personList.add(person);
             }
         }
         printInfo(personList);
     }
 
-    private boolean checksTheFilterListAndTheSpecificPerson(List<PersonFilter> personFilters, Person person) {
+    private boolean isPersonValidForFilters(List<PersonFilter> personFilters, Person person) {
         List<Boolean> inspectionResults = new ArrayList<>();
         for (PersonFilter personFilter : personFilters) {
-            boolean getResultOfChecking = checkingAPersonWithAllFilters(personFilter, person);
+            boolean getResultOfChecking = filterAndHumanCheck(personFilter, person);
             inspectionResults.add(getResultOfChecking);
         }
         return !inspectionResults.contains(false);
     }
 
-    private boolean checkingAPersonWithAllFilters(PersonFilter personFilter, Person person) {
+    private boolean filterAndHumanCheck(PersonFilter personFilter, Person person) {
         PersonProperty personProperty = personFilter.getPersonProperty();
 
         switch (personProperty) {
