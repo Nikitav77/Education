@@ -260,13 +260,13 @@ public class PersonStatisticHandler {
     private boolean isPersonValidForFilters(List<PersonFilter> personFilters, Person person) {
         List<Boolean> inspectionResults = new ArrayList<>();
         for (PersonFilter personFilter : personFilters) {
-            boolean getResultOfChecking = filterAndHumanCheck(personFilter, person);
+            boolean getResultOfChecking = isPersonValidForFilter(personFilter, person);
             inspectionResults.add(getResultOfChecking);
         }
         return !inspectionResults.contains(false);
     }
 
-    private boolean filterAndHumanCheck(PersonFilter personFilter, Person person) {
+    private boolean isPersonValidForFilter(PersonFilter personFilter, Person person) {
         PersonProperty personProperty = personFilter.getPersonProperty();
 
         switch (personProperty) {
