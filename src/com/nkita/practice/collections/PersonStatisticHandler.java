@@ -242,28 +242,30 @@ public class PersonStatisticHandler {
         }
     }
 
-    /**
-     * вывести в консоль всех пользователей кторые подходят под фильтры
-     *
-     * @param personFilters
-     */
-    public void checkFilteredStatistic(List<PersonFilter> personFilters) {
+
+    public void checkFilteredStatistic(PersonFilterRequest personFilterRequest) {
         List<Person> personList = new ArrayList<>();
         for (Person person : persons) {
-            if (isPersonValidForFilters(personFilters, person)) {
+
+            if (isPersonValidForFilters(personFilterRequest.getPersonFilters(), person, personFilterRequest)) {
                 personList.add(person);
             }
         }
         printInfo(personList);
     }
 
-    private boolean isPersonValidForFilters(List<PersonFilter> personFilters, Person person) {
+    private boolean isPersonValidForFilters(List<PersonFilter> personFilters, Person person, PersonFilterRequest personFilterRequest) {
         List<Boolean> inspectionResults = new ArrayList<>();
         for (PersonFilter personFilter : personFilters) {
             boolean getResultOfChecking = isPersonValidForFilter(personFilter, person);
             inspectionResults.add(getResultOfChecking);
         }
-        return !inspectionResults.contains(false);
+
+        if (personFilterRequest.isSearchType()) {
+            return inspectionResults.contains(true);
+        } else {
+            return !inspectionResults.contains(false);
+        }
     }
 
     private boolean isPersonValidForFilter(PersonFilter personFilter, Person person) {
@@ -295,7 +297,6 @@ public class PersonStatisticHandler {
             System.out.println("Search failed no Person(s) found");
 
     }
-
 
 }
 

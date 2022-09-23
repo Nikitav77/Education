@@ -15,19 +15,17 @@ public class Main {
         personStatisticHandler.addPersonForStatistic(new Person("Marcus", 20, 1.70, 52, Gender.MALE));
         personStatisticHandler.addPersonForStatistic(new Person("Alina", 24, 1.60, 70, Gender.FEMALE));
         personStatisticHandler.addPersonForStatistic(new Person("Diana", 29, 1.70, 70, Gender.FEMALE));
-        personStatisticHandler.addPersonForStatistic(new Person("Sasha", 40, 1.85, 80, Gender.MALE));
+        personStatisticHandler.addPersonForStatistic(new Person("Sasha", 25, 1.79, 80, Gender.MALE));
         personStatisticHandler.addPersonForStatistic(new Person("Maksim", 9, 1.85, 80, Gender.MALE));
-        personStatisticHandler.addPersonForStatistic(new Person("Dima", 49, 1.85, 80, Gender.MALE));
-        personStatisticHandler.addPersonForStatistic(new Person("Dima", 20, 1.85, 80, Gender.MALE));
-        personStatisticHandler.addPersonForStatistic(new Person("Dima", 30, 1.85, 80, Gender.MALE));
+        personStatisticHandler.addPersonForStatistic(new Person("Dima", 49, 1.85, 90, Gender.MALE));
+        personStatisticHandler.addPersonForStatistic(new Person("Dima", 25, 1.85, 80, Gender.MALE));
+        personStatisticHandler.addPersonForStatistic(new Person("Dima", 54, 1.85, 80, Gender.MALE));
 
         PersonFilter<String> filterByName = new PersonFilter<>(PersonProperty.NAME, Arrays.asList("Nikita", "Ilya"));
         PersonFilter<Integer> filterByAge = new PersonFilter<>(PersonProperty.AGE, Arrays.asList(23, 25, 54));
         PersonFilter<Double> filterHeight = new PersonFilter<>(PersonProperty.HEIGHT, Arrays.asList(1.79, 1.60));
         PersonFilter<Double> filterWeight = new PersonFilter<>(PersonProperty.WEIGHT, Arrays.asList(90.0, 100.0, 9.0));
         PersonFilter<Gender> filterGender = new PersonFilter<>(PersonProperty.GENDER, Arrays.asList(Gender.MALE));
-
-
 
         List<PersonFilter> filters = new ArrayList<>();
         filters.add(filterByName);
@@ -36,7 +34,9 @@ public class Main {
         filters.add(filterWeight);
         filters.add(filterGender);
 
+        PersonFilterRequest personFilterRequest = new PersonFilterRequest(filters, false);
+        personStatisticHandler.checkFilteredStatistic(personFilterRequest);
 
-      personStatisticHandler.checkFilteredStatistic(filters);
+
     }
 }

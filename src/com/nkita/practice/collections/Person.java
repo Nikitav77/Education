@@ -6,8 +6,8 @@ public class Person implements Comparable<Person> {
     private String name;
     private int age;
     private double height;
-    private  double weight;
-    private  Gender gender;
+    private double weight;
+    private Gender gender;
 
 
     public Person(String name, int age, double height, double weight, Gender gender) {
