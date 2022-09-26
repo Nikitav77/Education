@@ -219,4 +219,84 @@ public class PersonStatisticHandler {
             System.out.println("The oldest Person(s) witch gender " + gender + "\n" + oldestPersons);
         }
     }
+
+    public void checkSortedStatistic() {
+        List<Person> personList = new ArrayList<>(persons);
+        personList.sort(new Comparator<Person>() {
+            @Override
+            public int compare(Person age1, Person age2) {
+                if (age1.getAge() > age2.getAge()) {
+                    return -1;
+                } else if (age1.getAge() < age2.getAge()) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+
+            }
+        });
+        Collections.sort(personList);
+
+        for (Person o : personList) {
+            System.out.println(o.getName() + " | " + o.getAge());
+        }
+    }
+
+
+    public void checkFilteredStatistic(PersonFilterRequest personFilterRequest) {
+        List<Person> personList = new ArrayList<>();
+        for (Person person : persons) {
+
+            if (isPersonValidForFilters(personFilterRequest, person)) {
+                personList.add(person);
+            }
+        }
+        printInfo(personList);
+    }
+
+    private boolean isPersonValidForFilters(  PersonFilterRequest personFilterRequest, Person person) {
+        List<Boolean> inspectionResults = new ArrayList<>();
+        for (PersonFilter personFilter : personFilterRequest.getPersonFilters()) {
+            boolean getResultOfChecking = isPersonValidForFilter(personFilter, person);
+            inspectionResults.add(getResultOfChecking);
+        }
+
+        if (personFilterRequest.isSearchType()) {
+            return inspectionResults.contains(true);
+        } else {
+            return !inspectionResults.contains(false);
+        }
+    }
+
+    private boolean isPersonValidForFilter(PersonFilter personFilter, Person person) {
+        PersonProperty personProperty = personFilter.getPersonProperty();
+
+        switch (personProperty) {
+            case NAME:
+                return personFilter.getValues().contains(person.getName());
+            case AGE:
+                return personFilter.getValues().contains(person.getAge());
+            case HEIGHT:
+                return personFilter.getValues().contains(person.getHeight());
+            case WEIGHT:
+                return personFilter.getValues().contains(person.getWeight());
+            case GENDER:
+                return personFilter.getValues().contains(person.getGender());
+            default:
+                return false;
+        }
+
+    }
+
+    public void printInfo(List<Person> personList) {
+
+        if (!personList.isEmpty()) {
+            System.out.println("Search successful found Person(s)");
+            System.out.println(personList);
+        } else
+            System.out.println("Search failed no Person(s) found");
+
+    }
+
 }
+
