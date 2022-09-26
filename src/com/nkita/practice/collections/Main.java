@@ -34,7 +34,7 @@ public class Main {
         filters.add(filterWeight);
         filters.add(filterGender);
 
-        PersonFilterRequest personFilterRequest = new PersonFilterRequest(filters, false);
+        PersonFilterRequest personFilterRequest = new PersonFilterRequest(filters, true);
         personStatisticHandler.checkFilteredStatistic(personFilterRequest);
 
 

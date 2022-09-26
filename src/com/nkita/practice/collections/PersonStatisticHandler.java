@@ -247,16 +247,16 @@ public class PersonStatisticHandler {
         List<Person> personList = new ArrayList<>();
         for (Person person : persons) {
 
-            if (isPersonValidForFilters(personFilterRequest.getPersonFilters(), person, personFilterRequest)) {
+            if (isPersonValidForFilters(personFilterRequest, person)) {
                 personList.add(person);
             }
         }
         printInfo(personList);
     }
 
-    private boolean isPersonValidForFilters(List<PersonFilter> personFilters, Person person, PersonFilterRequest personFilterRequest) {
+    private boolean isPersonValidForFilters(  PersonFilterRequest personFilterRequest, Person person) {
         List<Boolean> inspectionResults = new ArrayList<>();
-        for (PersonFilter personFilter : personFilters) {
+        for (PersonFilter personFilter : personFilterRequest.getPersonFilters()) {
             boolean getResultOfChecking = isPersonValidForFilter(personFilter, person);
             inspectionResults.add(getResultOfChecking);
         }
