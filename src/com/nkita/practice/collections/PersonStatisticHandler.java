@@ -254,7 +254,7 @@ public class PersonStatisticHandler {
         printInfo(personList);
     }
 
-    private boolean isPersonValidForFilters(  PersonFilterRequest personFilterRequest, Person person) {
+    private boolean isPersonValidForFilters(PersonFilterRequest personFilterRequest, Person person) {
         List<Boolean> inspectionResults = new ArrayList<>();
         for (PersonFilter personFilter : personFilterRequest.getPersonFilters()) {
             boolean getResultOfChecking = isPersonValidForFilter(personFilter, person);
@@ -296,6 +296,72 @@ public class PersonStatisticHandler {
         } else
             System.out.println("Search failed no Person(s) found");
 
+    }
+
+    public void checkByGenderMap() {
+        List<String> male = new ArrayList<>();
+        List<String> female = new ArrayList<>();
+
+        for (Person person : persons) {
+            if (person.getGender() == Gender.MALE) {
+                male.add(person.getName());
+            } else {
+                female.add(person.getName());
+            }
+        }
+
+        Map<Gender, List<String>> genderListMapMale = new HashMap<>();
+        Map<Gender, List<String>> genderListMapFemale = new HashMap<>();
+
+        genderListMapMale.put(Gender.MALE, male);
+        genderListMapFemale.put(Gender.FEMALE, female);
+
+        if (female.size() > 0 && male.size() > 0) {
+            System.out.println(genderListMapFemale + " " + genderListMapMale);
+        } else if (female.size() != 0) {
+            System.out.println(genderListMapFemale);
+        } else if (male.size() != 0) {
+            System.out.println(genderListMapMale);
+        } else {
+            System.out.println("Statistics is empty");
+        }
+
+    }
+
+    public void checkMapByPersonProperty(PersonProperty personProperty) {
+        Map<String, List<Person>> stringListMap = new HashMap<>();
+
+        for (Person person : persons) {
+            String key = generateKey(personProperty, person);
+
+            List<Person> personList = new ArrayList<>();
+            personList.add(person);
+
+            List<Person> personListGetKey = stringListMap.get(key);
+
+            if (stringListMap.containsKey(key)) {
+                personListGetKey.add(person);
+                stringListMap.put(key, personListGetKey);
+            } else {
+                stringListMap.put(key, personList);
+            }
+        }
+        System.out.println(stringListMap);
+    }
+
+    public String generateKey(PersonProperty personProperty, Person person) {
+        switch (personProperty) {
+            case AGE:
+                return String.valueOf(person.getAge());
+            case GENDER:
+                return String.valueOf(person.getGender());
+            case NAME:
+                return person.getName();
+            case HEIGHT:
+                return String.valueOf(person.getHeight());
+            default:
+                return String.valueOf(person.getWeight());
+        }
     }
 
 }
