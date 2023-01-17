@@ -38,8 +38,8 @@ public class Main {
 //        personStatisticHandler.checkFilteredStatistic(personFilterRequest);
 
 
-        personStatisticHandler.checkByGenderMap();
-//        personStatisticHandler.checkMapByPersonProperty(PersonProperty.AGE);
+//        personStatisticHandler.checkByGenderMap();
+        personStatisticHandler.checkMapByPersonProperty(PersonProperty.AGE);
 
 
 

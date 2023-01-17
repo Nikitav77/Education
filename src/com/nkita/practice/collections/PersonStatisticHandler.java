@@ -293,8 +293,7 @@ public class PersonStatisticHandler {
         if (!personList.isEmpty()) {
             System.out.println("Search successful found Person(s)");
             System.out.println(personList);
-        } else
-            System.out.println("Search failed no Person(s) found");
+        } else System.out.println("Search failed no Person(s) found");
 
     }
 
@@ -310,18 +309,18 @@ public class PersonStatisticHandler {
             }
         }
 
-        Map<Gender, List<String>> genderListMapMale = new HashMap<>();
-        Map<Gender, List<String>> genderListMapFemale = new HashMap<>();
-
-        genderListMapMale.put(Gender.MALE, male);
-        genderListMapFemale.put(Gender.FEMALE, female);
+        Map<Gender, List<String>> genderListMapMaleAndFemale = new HashMap<>();
 
         if (female.size() > 0 && male.size() > 0) {
-            System.out.println(genderListMapFemale + " " + genderListMapMale);
+            genderListMapMaleAndFemale.put(Gender.MALE, male);
+            genderListMapMaleAndFemale.put(Gender.FEMALE, female);
+            System.out.println(genderListMapMaleAndFemale.entrySet());
         } else if (female.size() != 0) {
-            System.out.println(genderListMapFemale);
+            genderListMapMaleAndFemale.put(Gender.FEMALE, female);
+            System.out.println(genderListMapMaleAndFemale.entrySet());
         } else if (male.size() != 0) {
-            System.out.println(genderListMapMale);
+            genderListMapMaleAndFemale.put(Gender.MALE, male);
+            System.out.println(genderListMapMaleAndFemale.entrySet());
         } else {
             System.out.println("Statistics is empty");
         }
@@ -333,18 +332,9 @@ public class PersonStatisticHandler {
 
         for (Person person : persons) {
             String key = generateKey(personProperty, person);
-
-            List<Person> personList = new ArrayList<>();
-            personList.add(person);
-
-            List<Person> personListGetKey = stringListMap.get(key);
-
-            if (stringListMap.containsKey(key)) {
-                personListGetKey.add(person);
-                stringListMap.put(key, personListGetKey);
-            } else {
-                stringListMap.put(key, personList);
-            }
+            List<Person> mapValues = stringListMap.getOrDefault(key, new ArrayList<>());
+            mapValues.add(person);
+            stringListMap.put(key, mapValues);
         }
         System.out.println(stringListMap);
     }
